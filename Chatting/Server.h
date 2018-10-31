@@ -59,7 +59,7 @@ namespace Chatting {
 			this->Button->Name = L"Button";
 			this->Button->Size = System::Drawing::Size(66, 33);
 			this->Button->TabIndex = 0;
-			this->Button->Text = L"½ÃÀÛ";
+			this->Button->Text = L"ì‹œìž‘";
 			this->Button->UseVisualStyleBackColor = true;
 			this->Button->Click += gcnew System::EventHandler(this, &MyForm1::button1_Click);
 			// 
@@ -83,10 +83,10 @@ namespace Chatting {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(29, 42);
-			this->label1->Name = L"label1";
+			this->label1->Name = "label1";
 			this->label1->Size = System::Drawing::Size(39, 12);
 			this->label1->TabIndex = 5;
-			this->label1->Text = L"ipÁÖ¼Ò";
+			this->label1->Text = "ipì£¼ì†Œ";
 			// 
 			// backgroundWorker1
 			// 
@@ -155,27 +155,27 @@ namespace Chatting {
 		mainTextBox->AppendText(text + "\n");
 	}
 
-			 // backgroundWorker1 ½ÇÇà ÇÔ¼ö
+			 // backgroundWorker1 ì‹¤í–‰ í•¨ìˆ˜
 	private: System::Void BackgroundWorker_DoWork(System::Object^ sender, System::ComponentModel::DoWorkEventArgs^ e) {
-		// ¼­¹ö µ¿ÀÛÀ» ¾Ë¸²
+		// ì„œë²„ ë™ìž‘ì„ ì•Œë¦¼
 		server->Bind(IP);
 		server->Listen(10);
-		String^ text = "¼­¹ö°¡ µ¿ÀÛÇÏ°í ÀÖ½À´Ï´Ù.";
+		String^ text = "ì„œë²„ê°€ ë™ìž‘í•˜ê³  ìžˆìŠµë‹ˆë‹¤.";
 		addTextToMainText(text);
 
-		// ¹«ÇÑ ¹Ýº¹À¸·Î »ç¿ëÀÚµéÀ» ÄÁÆ®·ÑÇÔ
+		// ë¬´í•œ ë°˜ë³µìœ¼ë¡œ ì‚¬ìš©ìžë“¤ì„ ì»¨íŠ¸ë¡¤í•¨
 		while (true)
 		{
 			Socket^ clientAccept = server->Accept();
 			listClient->Add(clientAccept);
 
-			// Å¬¶óÀÌ¾ðÆ® Á¢¼Ó ½Ã ÇØ´ç Å¬¶óÀÌ¾ðÆ®¸¸ÀÇ ¾²·¹µå¸¦ ÇÒ´çÇØ client ÇÔ¼ö ½ÃÀÛ
+			// í´ë¼ì´ì–¸íŠ¸ ì ‘ì† ì‹œ í•´ë‹¹ í´ë¼ì´ì–¸íŠ¸ë§Œì˜ ì“°ë ˆë“œë¥¼ í• ë‹¹í•´ client í•¨ìˆ˜ ì‹œìž‘
 			threadClient = gcnew Thread(gcnew ParameterizedThreadStart(Chatting::MyForm1::client));
 			threadClient->IsBackground = true;
 			threadClient->Start(clientAccept);
 
-			// Å¬¶óÀÌ¾ðÆ® Á¢¼ÓÀ» ¾Ë¸²
-			String^ textTemp = "Å¬¶óÀÌ¾ðÆ®°¡ Á¢¼ÓÇß½À´Ï´Ù." + clientAccept->RemoteEndPoint->ToString();
+			// í´ë¼ì´ì–¸íŠ¸ ì ‘ì†ì„ ì•Œë¦¼
+			String^ textTemp = "í´ë¼ì´ì–¸íŠ¸ê°€ ì ‘ì†í–ˆìŠµë‹ˆë‹¤." + clientAccept->RemoteEndPoint->ToString();
 			addTextToMainText(textTemp);
 		}
 
